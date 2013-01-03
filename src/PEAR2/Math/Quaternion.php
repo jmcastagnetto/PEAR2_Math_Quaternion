@@ -334,5 +334,3 @@ class Quaternion {/*{{{*/
 
 }/*}}} end of PEAR2\Math\Quaternion */
 
-?>
-

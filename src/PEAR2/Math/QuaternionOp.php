@@ -125,6 +125,7 @@ class QuaternionOp {/*{{{*/
     static function negate($q) {/*{{{*/
         if (!QuaternionOp::isQuaternion($q)) {
             throw Quaternion\Exception("Parameter needs to be a Quaternion object");
+        }
         $q2 = clone $q;
         $q2->negate();
         return $q2;
@@ -290,5 +291,4 @@ class QuaternionOp {/*{{{*/
     }/*}}}*/
 
 }/*}}} end of QuaternionOp */
-?>
 
