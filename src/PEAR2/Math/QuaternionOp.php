@@ -106,8 +106,8 @@ class QuaternionOp {/*{{{*/
      * @access public
      */
     static function conjugate($q) {/*{{{*/
-        if (!QuaternionOp::isQuaternion($q1)) {
-            throw Quaternion\Exception("Parameter needs to be a Quaternion object");
+        if (!QuaternionOp::isQuaternion($q)) {
+            throw new Quaternion\Exception("Parameter needs to be a Quaternion object");
         }
         $q2 = clone $q;
         $q2->conjugate();
@@ -124,7 +124,7 @@ class QuaternionOp {/*{{{*/
      */
     static function negate($q) {/*{{{*/
         if (!QuaternionOp::isQuaternion($q)) {
-            throw Quaternion\Exception("Parameter needs to be a Quaternion object");
+            throw new Quaternion\Exception("Parameter needs to be a Quaternion object");
         }
         $q2 = clone $q;
         $q2->negate();
@@ -142,12 +142,12 @@ class QuaternionOp {/*{{{*/
      */
      static function inverse ($q) {/*{{{*/
         if (!QuaternionOp::isQuaternion($q)) {
-            throw Quaternion\Exception("Parameter needs to be a Quaternion object");
+            throw new Quaternion\Exception("Parameter needs to be a Quaternion object");
         }
         $c = QuaternionOp::conjugate($q);
         $norm = $q->norm();
         if ($norm == 0) {
-            throw Quaternion\Exception(
+            throw new Quaternion\Exception(
                 'Quaternion norm is zero, cannot calculate inverse');
         }
         $invmult = 1/$norm;
@@ -166,7 +166,7 @@ class QuaternionOp {/*{{{*/
     static function areEqual ($q1, $q2) {/*{{{*/
         if (!QuaternionOp::isQuaternion($q1)
             || !QuaternionOp::isQuaternion($q2)) {
-            throw Quaternion\Exception("Parameters need to be Quaternion objects");
+            throw new Quaternion\Exception("Parameters need to be Quaternion objects");
         }
         return ( $q1->getReal() === $q2->getReal()
             && $q1->getI() === $q2->getI()
@@ -186,7 +186,7 @@ class QuaternionOp {/*{{{*/
     static function add ($q1, $q2) {/*{{{*/
         if (!QuaternionOp::isQuaternion($q1)
             || !QuaternionOp::isQuaternion($q2)) {
-            throw Quaternion\Exception("Parameters need to be Quaternion objects");
+            throw new Quaternion\Exception("Parameters need to be Quaternion objects");
         }
        return new Quaternion( $q1->getReal() + $q2->getReal(),
                               $q1->getI() + $q2->getI(),
@@ -206,7 +206,7 @@ class QuaternionOp {/*{{{*/
     static function sub ($q1, $q2) {/*{{{*/
         if (!QuaternionOp::isQuaternion($q1)
             || !QuaternionOp::isQuaternion($q2)) {
-            throw Quaternion\Exception("Parameters need to be Quaternion objects");
+            throw new Quaternion\Exception("Parameters need to be Quaternion objects");
         }
         return QuaternionOp::add($q1, QuaternionOp::negate($q2));
     }/*}}}*/
@@ -224,7 +224,7 @@ class QuaternionOp {/*{{{*/
     static function mult ($q1, $q2) {/*{{{*/
         if (!QuaternionOp::isQuaternion($q1)
             || !QuaternionOp::isQuaternion($q2)) {
-            throw Quaternion\Exception("Parameters need to be Quaternion objects");
+            throw new Quaternion\Exception("Parameters need to be Quaternion objects");
         }
         // uses the fast multiplication algorithm
         $a = $q1->getReal(); $q1im = $q1->getAllIm();
@@ -264,7 +264,7 @@ class QuaternionOp {/*{{{*/
     static function div($q1, $q2) {/*{{{*/
         if (!QuaternionOp::isQuaternion($q1)
             || !QuaternionOp::isQuaternion($q2)) {
-            throw Quaternion\Exception("Parameters need to be Quaternion objects");
+            throw new Quaternion\Exception("Parameters need to be Quaternion objects");
         }
         $i2 = QuaternionOp::inverse($q2);
         return QuaternionOp::mult($i2, $q1);
@@ -281,7 +281,7 @@ class QuaternionOp {/*{{{*/
      */
     static function multReal ($q, $realnum) {/*{{{*/
         if (!QuaternionOp::isQuaternion($q) || !is_numeric($realnum)) {
-            throw Quaternion\Exception(
+            throw new Quaternion\Exception(
                 "A Quaternion object and a real number are needed");
         }
         return new Quaternion ( $realnum * $q->getReal(),

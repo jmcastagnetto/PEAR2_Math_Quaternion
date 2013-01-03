@@ -315,8 +315,8 @@ class Quaternion {/*{{{*/
      * @access public
      */
     public function __clone() {/*{{{*/
-        return new PEAR2\Math\Quaternion($this->getReal(), $this->getI(),
-                                         $this->getJ(), $this->getK());
+        return new Quaternion($this->getReal(), $this->getI(),
+                              $this->getJ(), $this->getK());
     }/*}}}*/
 
     /**
