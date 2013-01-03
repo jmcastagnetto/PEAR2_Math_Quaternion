@@ -2,9 +2,14 @@
 /**
  * PEAR2\Math\Quaternion
  *
- * @author Jesus M. Castagnetto <jmcastagnetto@php.net>
- * @license http://opensource.org/licenses/BSD-3-Clause BSD 3-clause license
- * @version 0.1.0
+ * PHP Version 5
+ *
+ * @category Math
+ * @package  Math_Quaternion
+ * @author   Jesus M. Castagnetto <jmcastagnetto@php.net>
+ * @license  http://opensource.org/licenses/BSD-3-Clause BSD 3-clause license
+ * @version  0.1.0
+ * @link     https://github.com/jmcastagnetto/Math_Quaternion
  */
 namespace PEAR2\Math;
 
@@ -66,10 +71,15 @@ namespace PEAR2\Math;
  * )
  * </pre>
  *
+ * @category Math
+ * @package  Math_Quaternion
+ * @author   Jesus M. Castagnetto <jmcastagnetto@php.net>
+ * @license  http://opensource.org/licenses/BSD-3-Clause BSD 3-clause license
+ * @link     https://github.com/jmcastagnetto/Math_Quaternion
  * @access  public
- * @package Quaternion
  */
-class Quaternion {/*{{{*/
+class Quaternion /*{{{*/
+{
 
     /**
      * The real part of the quaternion
@@ -106,14 +116,16 @@ class Quaternion {/*{{{*/
     /**
      * Constructor for PEAR2\Math\Quaternion
      *
-     * @param  float  $real
-     * @param  float  $i
-     * @param  float  $j
-     * @param  float  $k
+     * @param  float  $real real root
+     * @param  float  $i    first imaginary root
+     * @param  float  $j    second imaginary root
+     * @param  float  $k    third imaginary root
+     *
      * @return object PEAR2\Math\Quaternion
      * @access public
      */
-    public function __construct ($real, $i, $j, $k) {/*{{{*/
+    public function __construct ($real, $i, $j, $k) /*{{{*/
+    {
         $this->setReal($real);
         $this->setI($i);
         $this->setJ($j);
@@ -126,13 +138,14 @@ class Quaternion {/*{{{*/
      * @return float
      * @access public
      */
-    public function length2() {/*{{{*/
-            $r = $this->getReal();
-            $i = $this->getI();
-            $j = $this->getJ();
-            $k = $this->getK();
+    public function length2() /*{{{*/
+    {
+        $r = $this->getReal();
+        $i = $this->getI();
+        $j = $this->getJ();
+        $k = $this->getK();
 
-            return ($r*$r + $i*$i + $j*$j + $k*$k);
+        return ($r*$r + $i*$i + $j*$j + $k*$k);
     }/*}}}*/
 
     /**
@@ -141,7 +154,8 @@ class Quaternion {/*{{{*/
      * @return float
      * @access public
      */
-    public function norm() {/*{{{*/
+    public function norm() /*{{{*/
+    {
 
         return sqrt($this->length2());
     }/*}}}*/
@@ -152,7 +166,8 @@ class Quaternion {/*{{{*/
      * @return float
      * @access public
      */
-    public function length() {/*{{{*/
+    public function length() /*{{{*/
+    {
 
         return $this->norm();
     }/*}}}*/
@@ -160,11 +175,13 @@ class Quaternion {/*{{{*/
     /**
      * Normalizes the quaternion
      *
-     * @return mixed                           True on success
-     * @throws PEAR2\Math\Quaternion\Exception if norm = 0 or if final norm != 1
+     * @return mixed True on success
+     * @throws PEAR2\Math\Quaternion\Exception if norm = 0
+     *         or if final norm != 1
      * @access public
      */
-    public function normalize() {/*{{{*/
+    public function normalize() /*{{{*/
+    {
         $n = $this->norm();
         if ($n == 0.0) {
             throw PEAR2\Exception('Quaternion cannot be normalized, norm = 0');
@@ -174,7 +191,9 @@ class Quaternion {/*{{{*/
             $this->setJ($this->getJ() / $n);
             $this->setK($this->getK() / $n);
             if ($this->norm() != 1.0) {
-                throw PEAR2\Exception('Computation error while normalizing, norm != 1');
+                throw PEAR2\Exception(
+                    'Computation error while normalizing, norm != 1'
+                );
             } else {
                 return true;
             }
@@ -187,7 +206,8 @@ class Quaternion {/*{{{*/
      * @return void
      * @access public
      */
-    public function conjugate() {/*{{{*/
+    public function conjugate() /*{{{*/
+    {
         $this->setI(-1 * $this->getI());
         $this->setJ(-1 * $this->getJ());
         $this->setK(-1 * $this->getK());
@@ -199,7 +219,8 @@ class Quaternion {/*{{{*/
      * @return void
      * @access public
      */
-    public function negate() {/*{{{*/
+    public function negate() /*{{{*/
+    {
         $this->setReal(-1 * $this->getReal());
         $this->setI(-1 * $this->getI());
         $this->setJ(-1 * $this->getJ());
@@ -209,11 +230,13 @@ class Quaternion {/*{{{*/
     /**
      * Sets the real part
      *
-     * @param  float $real
+     * @param  float $real real root
+     *
      * @return void
      * @access public
      */
-    public function setReal($real) {/*{{{*/
+    public function setReal($real) /*{{{*/
+    {
         $this->real = floatval($real);
     }/*}}}*/
 
@@ -223,7 +246,8 @@ class Quaternion {/*{{{*/
      * @return float
      * @access public
      */
-    public function getReal() {/*{{{*/
+    public function getReal() /*{{{*/
+    {
 
         return $this->real;
     }/*}}}*/
@@ -231,11 +255,13 @@ class Quaternion {/*{{{*/
     /**
      * Sets I
      *
-     * @param  float $i
+     * @param  float $i first imaginary root
+     *
      * @return void
      * @access public
      */
-    public function setI($i) {/*{{{*/
+    public function setI($i) /*{{{*/
+    {
         $this->i = floatval($i);
     }/*}}}*/
 
@@ -245,7 +271,8 @@ class Quaternion {/*{{{*/
      * @return float
      * @access public
      */
-    public function getI() {/*{{{*/
+    public function getI() /*{{{*/
+    {
 
         return $this->i;
     }/*}}}*/
@@ -253,11 +280,13 @@ class Quaternion {/*{{{*/
     /**
      * Sets J
      *
-     * @param  float $j
+     * @param  float $j second imaginary root
+     *
      * @return void
      * @access public
      */
-    public function setJ($j) {/*{{{*/
+    public function setJ($j) /*{{{*/
+    {
         $this->j = floatval($j);
     }/*}}}*/
 
@@ -267,7 +296,8 @@ class Quaternion {/*{{{*/
      * @return float
      * @access public
      */
-    public function getJ() {/*{{{*/
+    public function getJ() /*{{{*/
+    {
 
         return $this->j;
     }/*}}}*/
@@ -275,11 +305,13 @@ class Quaternion {/*{{{*/
     /**
      * Sets K
      *
-     * @param  float $k
+     * @param  float $k third imaginary root
+     *
      * @return void
      * @access public
      */
-    public function setK($k) {/*{{{*/
+    public function setK($k) /*{{{*/
+    {
         $this->k = floatval($k);
     }/*}}}*/
 
@@ -289,17 +321,24 @@ class Quaternion {/*{{{*/
      * @return float
      * @access public
      */
-    public function getK() {/*{{{*/
+    public function getK() /*{{{*/
+    {
 
         return $this->k;
     }/*}}}*/
 
     /**
      * Sets I, J, K
+     *
+     * @param  float  $i    first imaginary root
+     * @param  float  $j    second imaginary root
+     * @param  float  $k    third imaginary root
+     *
      * @return void
      * @access public
      */
-    public function setAllIm($i, $j, $k) {/*{{{*/
+    public function setAllIm($i, $j, $k) /*{{{*/
+    {
         $this->setI($i);
         $this->setJ($j);
         $this->setK($k);
@@ -311,9 +350,11 @@ class Quaternion {/*{{{*/
      * @return array
      * @access public
      */
-    public function getAllIm() {/*{{{*/
+    public function getAllIm() /*{{{*/
+    {
 
-        return array ( 'i' => $this->getI(), 'j' => $this->getJ(), 'k' => $this->getK() );
+        return array ( 'i' => $this->getI(),
+            'j' => $this->getJ(), 'k' => $this->getK() );
     }/*}}}*/
 
     /**
@@ -322,10 +363,15 @@ class Quaternion {/*{{{*/
      * @return object PEAR2\Math\Quaternion
      * @access public
      */
-    public function __clone() {/*{{{*/
+    public function __clone() /*{{{*/
+    {
 
-        return new Quaternion($this->getReal(), $this->getI(),
-                              $this->getJ(), $this->getK());
+        return new Quaternion(
+            $this->getReal(),
+            $this->getI(),
+            $this->getJ(),
+            $this->getK()
+        );
     }/*}}}*/
 
     /**
@@ -334,10 +380,15 @@ class Quaternion {/*{{{*/
      * @return string
      * @access public
      */
-    public function __toString () {/*{{{*/
+    public function __toString () /*{{{*/
+    {
 
-        return ( $this->getReal()." + ".$this->getI()."i + ".
-                 $this->getJ()."j + ".$this->getK()."k");
+        return sprintf(
+            "%s + %si + %sj + %sk",
+            $this->getReal(),
+            $this->getI(),
+            $this->getJ(),
+            $this->getK()
+        );
     }/*}}}*/
-
 }/*}}} end of PEAR2\Math\Quaternion */

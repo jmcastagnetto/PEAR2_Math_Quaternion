@@ -2,9 +2,14 @@
 /**
  * PEAR2\Math\QuaternionOp
  *
- * @author Jesus M. Castagnetto <jmcastagnetto@php.net>
- * @license http://opensource.org/licenses/BSD-3-Clause BSD 3-clause license
- * @version 0.1.0
+ * PHP Version 5
+ *
+ * @category Math
+ * @package  Math_Quaternion
+ * @author   Jesus M. Castagnetto <jmcastagnetto@php.net>
+ * @license  http://opensource.org/licenses/BSD-3-Clause BSD 3-clause license
+ * @version  0.1.0
+ * @link     https://github.com/jmcastagnetto/Math_Quaternion
  */
 namespace PEAR2\Math;
 
@@ -81,19 +86,25 @@ namespace PEAR2\Math;
  * b/a: -12.843861533947 + 2.8122769321069i + 4.2184153981603j + 0.70306923302672k
  * </pre>
  *
+ * @category Math
+ * @package  Math_Quaternion
+ * @author   Jesus M. Castagnetto <jmcastagnetto@php.net>
+ * @license  http://opensource.org/licenses/BSD-3-Clause BSD 3-clause license
+ * @link     https://github.com/jmcastagnetto/Math_Quaternion
  * @access  public
- * @package Quaternion
  */
-class QuaternionOp {/*{{{*/
-
+class QuaternionOp /*{{{*/
+{
     /**
      * Whether the object is a Quaternion instance
      *
-     * @param  object Quaternion $q1
-     * @return boolean           TRUE if object is a Quaternion, FALSE otherwise
+     * @param  object $q a Quaternion
+     *
+     * @return boolean TRUE if object is a Quaternion, FALSE otherwise
      * @access public
      */
-    public static function isQuaternion ($q) {/*{{{*/
+    public static function isQuaternion ($q) /*{{{*/
+    {
 
         return $q instanceof Quaternion;
     }/*}}}*/
@@ -101,14 +112,18 @@ class QuaternionOp {/*{{{*/
     /**
      * Calculate the conjugate of a quaternion
      *
-     * @param  object Quaternion          $q
-     * @return object                     a Quaternion on success
+     * @param  object $q a Quaternion
+     *
+     * @return object a Quaternion on success
      * @throws PEAR2\Quaternion\Exception
      * @access public
      */
-    public static function conjugate($q) {/*{{{*/
+    public static function conjugate($q) /*{{{*/
+    {
         if (!QuaternionOp::isQuaternion($q)) {
-            throw new Quaternion\Exception("Parameter needs to be a Quaternion object");
+            throw new Quaternion\Exception(
+                "Parameter needs to be a Quaternion object"
+            );
         }
         $q2 = clone $q;
         $q2->conjugate();
@@ -119,12 +134,14 @@ class QuaternionOp {/*{{{*/
     /**
      * Returns a negated quaternion
      *
-     * @param  object Quaternion          $q
-     * @return object                     a Quaternion on success
+     * @param  object $q a Quaternion
+     *
+     * @return object a Quaternion on success
      * @throws PEAR2\Quaternion\Exception
      * @access public
      */
-    public static function negate($q) {/*{{{*/
+    public static function negate($q) /*{{{*/
+    {
         if (!QuaternionOp::isQuaternion($q)) {
             throw new Quaternion\Exception("Parameter needs to be a Quaternion object");
         }
@@ -137,13 +154,15 @@ class QuaternionOp {/*{{{*/
     /**
      * Returns the inverse of the given quaternion
      *
-     * @param  object Quaternion          $q1
-     * @return object                     a Quaternion on success
+     * @param  object $q a Quaternion
+     *
+     * @return object a Quaternion on success
      * @throws PEAR2\Quaternion\Exception
      * @access public
      * @see QuaternionOp::multReal
      */
-     static function inverse ($q) {/*{{{*/
+    public static function inverse ($q) /*{{{*/
+    {
         if (!QuaternionOp::isQuaternion($q)) {
             throw new Quaternion\Exception("Parameter needs to be a Quaternion object");
         }
@@ -151,7 +170,8 @@ class QuaternionOp {/*{{{*/
         $norm = $q->norm();
         if ($norm == 0) {
             throw new Quaternion\Exception(
-                'Quaternion norm is zero, cannot calculate inverse');
+                'Quaternion norm is zero, cannot calculate inverse'
+            );
         }
         $invmult = 1/$norm;
 
@@ -161,57 +181,68 @@ class QuaternionOp {/*{{{*/
     /**
      * Checks if two quaternions represent the same number
      *
-     * @param  object Quaternion          $q1
-     * @param  object Quaternion          $q2
-     * @return boolean                    TRUE if q1 == q2, FALSE otherwise
+     * @param  object $q1 a Quaternion
+     * @param  object $q2 a Quaternion
+     *
+     * @return boolean TRUE if q1 == q2, FALSE otherwise
      * @throws PEAR2\Quaternion\Exception
      * @access public
      */
-    public static function areEqual ($q1, $q2) {/*{{{*/
+    public static function areEqual ($q1, $q2) /*{{{*/
+    {
         if (!QuaternionOp::isQuaternion($q1)
-            || !QuaternionOp::isQuaternion($q2)) {
+            || !QuaternionOp::isQuaternion($q2)
+        ) {
             throw new Quaternion\Exception("Parameters need to be Quaternion objects");
         }
 
         return ( $q1->getReal() === $q2->getReal()
-            && $q1->getI() === $q2->getI()
-            && $q1->getJ() === $q2->getJ()
-            && $q1->getK() === $q2->getK() );
+                && $q1->getI() === $q2->getI()
+                && $q1->getJ() === $q2->getJ()
+                && $q1->getK() === $q2->getK() );
     }/*}}}*/
 
     /**
      * Adds two quaternions: q1 + q2
      *
-     * @param  object Quaternion          $q1
-     * @param  object Quaternion          $q2
-     * @return object                     a Quaternion on success
+     * @param  object $q1 a Quaternion
+     * @param  object $q2 a Quaternion
+     *
+     * @return object a Quaternion on success
      * @throws PEAR2\Quaternion\Exception
      * @access public
      */
-    public static function add ($q1, $q2) {/*{{{*/
+    public static function add ($q1, $q2) /*{{{*/
+    {
         if (!QuaternionOp::isQuaternion($q1)
-            || !QuaternionOp::isQuaternion($q2)) {
+            || !QuaternionOp::isQuaternion($q2)
+        ) {
             throw new Quaternion\Exception("Parameters need to be Quaternion objects");
         }
 
-       return new Quaternion( $q1->getReal() + $q2->getReal(),
-                              $q1->getI() + $q2->getI(),
-                              $q1->getJ() + $q2->getJ(),
-                              $q1->getK() + $q2->getK() );
+        return new Quaternion(
+            $q1->getReal() + $q2->getReal(),
+            $q1->getI() + $q2->getI(),
+            $q1->getJ() + $q2->getJ(),
+            $q1->getK() + $q2->getK()
+        );
     }/*}}}*/
 
     /**
      * Substracts two quaternions: q1 - q2
      *
-     * @param  object Quaternion          $q1
-     * @param  object Quaternion          $q2
-     * @return object                     a Quaternion on success
+     * @param  object $q1 a Quaternion
+     * @param  object $q2 a Quaternion
+     *
+     * @return object a Quaternion on success
      * @throws PEAR2\Quaternion\Exception
      * @access public
      */
-    public static function sub ($q1, $q2) {/*{{{*/
+    public static function sub ($q1, $q2) /*{{{*/
+    {
         if (!QuaternionOp::isQuaternion($q1)
-            || !QuaternionOp::isQuaternion($q2)) {
+            || !QuaternionOp::isQuaternion($q2)
+        ) {
             throw new Quaternion\Exception("Parameters need to be Quaternion objects");
         }
 
@@ -222,23 +253,32 @@ class QuaternionOp {/*{{{*/
      * Multiplies two quaternions: q1 * q2
      * It uses a fast multiplication algorithm.
      *
-     * @param  object Quaternion          $q1
-     * @param  object Quaternion          $q2
-     * @return object                     a Quaternion on success, PEAR_Error otherwise
+     * @param  object $q1 a Quaternion
+     * @param  object $q2 a Quaternion
+     *
+     * @return object a Quaternion on success
      * @throws PEAR2\Quaternion\Exception
      * @access public
      */
-    public static function mult ($q1, $q2) {/*{{{*/
+    public static function mult ($q1, $q2) /*{{{*/
+    {
         if (!QuaternionOp::isQuaternion($q1)
-            || !QuaternionOp::isQuaternion($q2)) {
+            || !QuaternionOp::isQuaternion($q2)
+        ) {
             throw new Quaternion\Exception("Parameters need to be Quaternion objects");
         }
         // uses the fast multiplication algorithm
-        $a = $q1->getReal(); $q1im = $q1->getAllIm();
-        $b = $q1im["i"]; $c = $q1im["j"]; $d = $q1im["k"];
+        $a = $q1->getReal();
+        $q1im = $q1->getAllIm();
+        $b = $q1im["i"];
+        $c = $q1im["j"];
+        $d = $q1im["k"];
 
-        $x = $q2->getReal(); $q2im = $q2->getAllIm();
-        $y = $q2im["i"]; $z = $q2im["j"]; $w = $q2im["k"];
+        $x = $q2->getReal();
+        $q2im = $q2->getAllIm();
+        $y = $q2im["i"];
+        $z = $q2im["j"];
+        $w = $q2im["k"];
 
         $t0 = ($d - $c) * ($z - $w);
         $t1 = ($a + $b) * ($x + $y);
@@ -256,21 +296,24 @@ class QuaternionOp {/*{{{*/
         $j = $t2 + $t9 - $t7;
         $k = $t3 + $t9 - $t6;
 
-        return new Quaternion($r, $i , $j, $k);
+        return new Quaternion($r, $i, $j, $k);
     }/*}}}*/
 
     /**
      * Divides two quaternions: q1 / q2
      *
-     * @param  object Quaternion          $q1
-     * @param  object Quaternion          $q2
-     * @return object                     a Quaternion on success
+     * @param  object $q1 a Quaternion
+     * @param  object $q2 a Quaternion
+     *
+     * @return object a Quaternion on success
      * @throws PEAR2\Quaternion\Exception
      * @access public
      */
-    public static function div($q1, $q2) {/*{{{*/
+    public static function div($q1, $q2) /*{{{*/
+    {
         if (!QuaternionOp::isQuaternion($q1)
-            || !QuaternionOp::isQuaternion($q2)) {
+            || !QuaternionOp::isQuaternion($q2)
+        ) {
             throw new Quaternion\Exception("Parameters need to be Quaternion objects");
         }
         $i2 = QuaternionOp::inverse($q2);
@@ -281,22 +324,26 @@ class QuaternionOp {/*{{{*/
     /**
      * Multiplies a quaternion by a real number: q1 * realnum
      *
-     * @param  object Quaternion          $q1
-     * @param  float                      $realnum
-     * @return object                     a Quaternion on success
+     * @param  object $q       a Quaternion
+     * @param  float  $realnum a real number
+     *
+     * @return object a Quaternion on success
      * @throws PEAR2\Quaternion\Exception
      * @access public
      */
-    public static function multReal ($q, $realnum) {/*{{{*/
+    public static function multReal ($q, $realnum) /*{{{*/
+    {
         if (!QuaternionOp::isQuaternion($q) || !is_numeric($realnum)) {
             throw new Quaternion\Exception(
-                "A Quaternion object and a real number are needed");
+                "A Quaternion object and a real number are needed"
+            );
         }
 
-        return new Quaternion ( $realnum * $q->getReal(),
-                                $realnum * $q->getI(),
-                                $realnum * $q->getJ(),
-                                $realnum * $q->getK() );
+        return new Quaternion(
+            $realnum * $q->getReal(),
+            $realnum * $q->getI(),
+            $realnum * $q->getJ(),
+            $realnum * $q->getK()
+        );
     }/*}}}*/
-
 }/*}}} end of QuaternionOp */
