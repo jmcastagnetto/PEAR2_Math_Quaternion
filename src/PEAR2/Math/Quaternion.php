@@ -161,7 +161,7 @@ class Quaternion {/*{{{*/
      * @throws PEAR2\Math\Quaternion\Exception if norm = 0 or if final norm != 1
      * @access public
      */
-    public function normalize() throws PEAR2\Math\Quaternion\Exception  {/*{{{*/
+    public function normalize() {/*{{{*/
         $n = $this->norm();
         if ($n == 0.0) {
             throw PEAR2\Exception('Quaternion cannot be normalized, norm = 0');
