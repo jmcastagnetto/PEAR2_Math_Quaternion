@@ -9,6 +9,6 @@
 
 namespace PEAR2\Math\Quaternion;
 
-class Exception extends \Exception {
+class Exception extends \Exception
+{
 }
-
